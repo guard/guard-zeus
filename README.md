@@ -50,12 +50,24 @@ Available options:
 Known Issues
 ------------
 
+
+### Use with pry
+
 There is a known issue when using guard-zeus with pry, notably the zeus output appear on top of the pry console.
 
 The workaround is to add the `cli` setting in your `Guardfile`, e.g.
 
 ```
 guard 'zeus', cli: '> /dev/null' do
+```
+
+### Lingering zeus process
+
+If you have issues with `zeus` lingering around after exiting `guard`, you can
+add the following to the top of your `Guardfile`.
+
+```
+at_exit {exec('pkill -f zeus')}
 ```
 
 Development
